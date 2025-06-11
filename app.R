@@ -5,21 +5,12 @@
 # Date: October 2023
 # Updated: June 2025 (tmap v4 compatibility)
 #################################################################################
-if(!"remotes" %in% installed.packages()){
-  install.packages("remotes")
-}
+
 # list my required packages
-required_pkgs = c("magrittr", "dplyr", "stringr", "tidyr", "googlesheets4", 
+if(!require("pacman")) install.packages("pacman")
+pacman::p_load("magrittr", "dplyr", "stringr", "tidyr", "googlesheets4", 
                   "shiny", "bslib", "shinycssloaders", "leaflet", "tmap", 
                   "plotly", "sf", "jsonlite", "openssl", "janitor")
-
-# Get the missing required packages and install them
-missing_pkgs <- setdiff(required_pkgs, installed.packages()[, "Package"])
-if(length(missing_pkgs) != 0){
-  remotes::install_cran(missing_pkgs)
-}
-# load the libraries of my required packages
-lapply(required_pkgs, require, character.only = T)
 
 # Authenticate google sheets with a service account
 #---------------------------------------------------
